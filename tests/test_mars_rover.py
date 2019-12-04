@@ -13,3 +13,8 @@ class TestMarsRover(unittest.TestCase):
         mars_rover = MarsRover()
         status = mars_rover.run('M')
         self.assertEqual(status, '1 0 E')
+
+    def test_should_return_x_minus_1_given_given_command_is_M_and_facing_is_W(self):
+        mars_rover = MarsRover('0 0 W')
+        status = mars_rover.run('M')
+        self.assertEqual(status, '-1 0 W')
