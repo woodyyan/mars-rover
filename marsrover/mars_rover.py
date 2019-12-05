@@ -19,29 +19,38 @@ class MarsRover:
 
     def __execute(self, command):
         if command == 'M':
-            if self.__direction == 'E':
-                self.__x += 1
-            elif self.__direction == 'W':
-                self.__x -= 1
-            elif self.__direction == 'N':
-                self.__y += 1
-            elif self.__direction == 'S':
-                self.__y -= 1
+            self.__move()
         elif command == 'L':
-            if self.__direction == 'E':
-                self.__direction = 'N'
-            elif self.__direction == 'N':
-                self.__direction = 'W'
-            elif self.__direction == 'W':
-                self.__direction = 'S'
-            elif self.__direction == 'S':
-                self.__direction = 'E'
+            self.__turn_left()
         elif command == 'R':
-            if self.__direction == 'E':
-                self.__direction = 'S'
-            elif self.__direction == 'S':
-                self.__direction = 'W'
-            elif self.__direction == 'W':
-                self.__direction = 'N'
-            elif self.__direction == 'N':
-                self.__direction = 'E'
+            self.__turn_right()
+
+    def __turn_right(self):
+        if self.__direction == 'E':
+            self.__direction = 'S'
+        elif self.__direction == 'S':
+            self.__direction = 'W'
+        elif self.__direction == 'W':
+            self.__direction = 'N'
+        elif self.__direction == 'N':
+            self.__direction = 'E'
+
+    def __turn_left(self):
+        if self.__direction == 'E':
+            self.__direction = 'N'
+        elif self.__direction == 'N':
+            self.__direction = 'W'
+        elif self.__direction == 'W':
+            self.__direction = 'S'
+        elif self.__direction == 'S':
+            self.__direction = 'E'
+
+    def __move(self):
+        if self.__direction == 'E':
+            self.__x += 1
+        elif self.__direction == 'W':
+            self.__x -= 1
+        elif self.__direction == 'N':
+            self.__y += 1
+        elif self.__direction == 'S':
+            self.__y -= 1
