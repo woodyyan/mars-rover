@@ -19,6 +19,8 @@ class MarsRover:
                     self.__execute(demand)
             except ExceedAreaException:
                 return 'Exceed area!'
+            except HasRestrictPointException:
+                return 'Stop due to block!'
         return '%s %s %s' % (self.__x, self.__y, self.__direction)
 
     def __execute(self, command):
@@ -61,10 +63,19 @@ class MarsRover:
 
         if self.__does_exceed_area():
             raise ExceedAreaException()
+        elif self.__has_restrict_point():
+            raise HasRestrictPointException()
 
     def __does_exceed_area(self):
         if self.__area:
             return not (self.__area.right > self.__x > self.__area.left and self.__area.top > self.__y > self.__area.bottom)
+        return False
+
+    def __has_restrict_point(self):
+        if self.__area:
+            for point in self.__area.restrict_points:
+                if point[0] == self.__x and point[1] == self.__y:
+                    return True
         return False
 
 
@@ -78,4 +89,8 @@ class Area:
 
 
 class ExceedAreaException(Exception):
+    pass
+
+
+class HasRestrictPointException(Exception):
     pass

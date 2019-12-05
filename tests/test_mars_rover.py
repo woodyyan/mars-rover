@@ -78,3 +78,8 @@ class TestMarsRover(unittest.TestCase):
         mars_rover = MarsRover('10 10 E', Area(-10, 10, 10, -10, []))
         status = mars_rover.run('M')
         self.assertEqual(status, 'Exceed area!')
+
+    def test_should_return_stop_due_to_block_given_command_is_M_when_facing_restrict_point(self):
+        mars_rover = MarsRover('1 1 E', Area(-10, 10, 10, -10, [(2, 1), (1, 2)]))
+        status = mars_rover.run('M')
+        self.assertEqual(status, 'Stop due to block!')
