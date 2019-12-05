@@ -11,6 +11,13 @@ class MarsRover:
             self.__direction = 'E'
 
     def run(self, command=None):
+        if command:
+            demands = list(command)
+            for demand in demands:
+                self.__execute(demand)
+        return '%s %s %s' % (self.__x, self.__y, self.__direction)
+
+    def __execute(self, command):
         if command == 'M':
             if self.__direction == 'E':
                 self.__x += 1
@@ -36,4 +43,5 @@ class MarsRover:
                 self.__direction = 'W'
             elif self.__direction == 'W':
                 self.__direction = 'N'
-        return '%s %s %s' % (self.__x, self.__y, self.__direction)
+            elif self.__direction == 'N':
+                self.__direction = 'E'
