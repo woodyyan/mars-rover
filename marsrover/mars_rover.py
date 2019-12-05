@@ -18,4 +18,6 @@ class MarsRover:
                 self.__x -= 1
             elif self.__direction == 'N':
                 self.__y += 1
+            elif self.__direction == 'S':
+                self.__y -= 1
         return '%s %s %s' % (self.__x, self.__y, self.__direction)
