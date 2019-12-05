@@ -34,4 +34,6 @@ class MarsRover:
                 self.__direction = 'S'
             elif self.__direction == 'S':
                 self.__direction = 'W'
+            elif self.__direction == 'W':
+                self.__direction = 'N'
         return '%s %s %s' % (self.__x, self.__y, self.__direction)
