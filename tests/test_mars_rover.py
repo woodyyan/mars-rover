@@ -1,6 +1,6 @@
 import unittest
 
-from marsrover.mars_rover import MarsRover
+from marsrover.mars_rover import MarsRover, Area
 
 
 class TestMarsRover(unittest.TestCase):
@@ -73,3 +73,8 @@ class TestMarsRover(unittest.TestCase):
         mars_rover = MarsRover('0 0 N')
         status = mars_rover.run('MLMMRMMML')
         self.assertEqual(status, '-2 4 W')
+
+    def test_should_return_exceed_area_given_command_is_M_when_location_is_10_and_10_and_facing_E(self):
+        mars_rover = MarsRover('10 10 E', Area(-10, 10, 10, -10, []))
+        status = mars_rover.run('M')
+        self.assertEqual(status, 'Exceed area!')

@@ -1,5 +1,5 @@
 class MarsRover:
-    def __init__(self, info=None):
+    def __init__(self, info=None, area=None):
         if info:
             status = info.split(' ')
             self.__x = int(status[0])
@@ -9,12 +9,16 @@ class MarsRover:
             self.__x = 0
             self.__y = 0
             self.__direction = 'E'
+        self.__area = area
 
     def run(self, command=None):
         if command:
             demands = list(command)
-            for demand in demands:
-                self.__execute(demand)
+            try:
+                for demand in demands:
+                    self.__execute(demand)
+            except ExceedAreaException:
+                return 'Exceed area!'
         return '%s %s %s' % (self.__x, self.__y, self.__direction)
 
     def __execute(self, command):
@@ -54,3 +58,24 @@ class MarsRover:
             self.__y += 1
         elif self.__direction == 'S':
             self.__y -= 1
+
+        if self.__does_exceed_area():
+            raise ExceedAreaException()
+
+    def __does_exceed_area(self):
+        if self.__area:
+            return not (self.__area.right > self.__x > self.__area.left and self.__area.top > self.__y > self.__area.bottom)
+        return False
+
+
+class Area:
+    def __init__(self, left, right, top, bottom, restrict_points):
+        self.left = left
+        self.right = right
+        self.top = top
+        self.bottom = bottom
+        self.restrict_points = restrict_points
+
+
+class ExceedAreaException(Exception):
+    pass
